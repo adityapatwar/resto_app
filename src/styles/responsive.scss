@@ -1,0 +1,120 @@
+/* src/styles/responsive.scss */
+
+/* Mobile First Approach */
+
+/* Mobile Styles (default) */
+.hamburger {
+    display: block; /* Show hamburger on mobile */
+  }
+  
+  .nav-desktop {
+    display: none; /* Hide desktop nav on mobile */
+  }
+  
+  .nav-mobile {
+    width: 80%; /* Adjust width for smaller screens */
+  }
+  
+  .drawer-header .logo h1 {
+    font-size: 20px;
+  }
+  
+  /* Tablet Styles */
+  @media (min-width: 600px) {
+    .hamburger {
+      display: none; /* Hide hamburger on larger mobile devices */
+    }
+  
+    .nav-desktop {
+      display: block; /* Show desktop nav on larger mobile devices */
+    }
+  
+    .hero-text h2 {
+      font-size: 28px;
+    }
+  
+    .hero-text p {
+      font-size: 18px;
+    }
+  
+    .restaurant-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  
+    .search-filter {
+      flex-direction: row;
+      justify-content: center;
+    }
+  
+    #search-input,
+    #city-filter {
+      margin: 0 8px;
+    }
+  }
+  
+  /* Desktop Styles */
+  @media (min-width: 768px) {
+    .nav-desktop {
+      display: block; /* Ensure desktop nav is visible */
+    }
+  
+    .hamburger {
+      display: none; /* Hide hamburger on desktop */
+    }
+  
+    .hero-inner {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+  
+    .about-content {
+      grid-template-columns: 1fr 1fr;
+    }
+  
+    .restaurant-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  
+    .search-filter {
+      flex-direction: row;
+      justify-content: center;
+    }
+  
+    #search-input,
+    #city-filter {
+      margin: 0 8px;
+    }
+  }
+  
+  /* Large Desktop Styles */
+  @media (min-width: 1200px) {
+    .container {
+      max-width: 1200px;
+    }
+  
+    .hero {
+      padding: 180px 0 100px;
+    }
+  
+    .hero-text h2 {
+      font-size: 48px;
+    }
+  
+    .hero-text p {
+      font-size: 24px;
+    }
+  
+    .restaurant-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  
+    .nav-mobile {
+      width: 300px; /* Increase drawer width for larger screens */
+    }
+  
+    .drawer-header .logo h1 {
+      font-size: 24px;
+    }
+  }
+  

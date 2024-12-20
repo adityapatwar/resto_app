@@ -1,3 +1,5 @@
+/* src/styles/main.scss */
+
 /* Reset and base styles */
 * {
   margin: 0;
@@ -10,6 +12,7 @@ body {
   line-height: 1.6;
   background-color: #FFFFFF;
   color: #31363F;
+  padding-top: 60px; /* To prevent content from being hidden behind the fixed header */
 }
 
 a {
@@ -150,7 +153,7 @@ header.scrolled {
   cursor: pointer;
   width: 44px;
   height: 44px;
-  display: none;
+  display: none; /* Hidden by default, shown in mobile via responsive.scss */
 }
 
 .hamburger:focus-visible {
@@ -168,7 +171,7 @@ header.scrolled {
   box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
   overflow-y: auto;
   transform: translateX(-100%);
-  transition: none;
+  transition: transform 0.3s ease;
   z-index: 1000;
 }
 
@@ -271,6 +274,7 @@ header.scrolled {
 /* Featured Restaurants */
 .featured-restaurants {
   padding: 60px 0;
+  text-align: center; /* Center the section title */
 }
 
 .section-title {
@@ -279,10 +283,17 @@ header.scrolled {
   margin-bottom: 40px;
 }
 
+.featured-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 16px; /* Center the container */
+}
+
 .restaurant-grid {
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 24px;
+  padding: 0 16px 24px; /* Padding left, right, and bottom */
 }
 
 .restaurant-item {
@@ -290,9 +301,8 @@ header.scrolled {
   border-radius: 8px;
   overflow: hidden;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
-  transition: transform 0.3s ease;
-  min-width: 44px;
-  min-height: 44px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer; /* Indicate clickable items */
 }
 
 .restaurant-item:focus-within {
@@ -301,6 +311,7 @@ header.scrolled {
 
 .restaurant-item:hover {
   transform: translateY(-8px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
 }
 
 .restaurant-item img {
@@ -435,84 +446,95 @@ footer p {
   min-height: 44px;
 }
 
+/* Mobile Menu Visibility */
 .hamburger {
-  display: block;
+  display: none; /* Hidden by default, shown in responsive */
 }
 
 .nav-desktop {
-  display: none;
+  display: none; /* Hidden by default, shown in responsive */
 }
 
-@media(min-width: 600px) {
-  .hamburger {
-    display: none;
-  }
-
-  .nav-desktop {
-    display: block;
-  }
-
-  .hero-text h2 {
-    font-size: 32px;
-  }
-
-  .hero-text p {
-    font-size: 20px;
-  }
+/* Detail Page Styles */
+.restaurant-detail {
+  max-width: 1200px;
+  margin: 80px auto 40px; /* Added top margin to prevent overlap with header */
+  padding: 0 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
 }
 
-@media(min-width: 768px) {
-  .hamburger {
-    display: none;
-  }
-
-  .nav-desktop {
-    display: block;
-  }
-
-  .hero-inner {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
-
-  .about-content {
-    grid-template-columns: 1fr 1fr;
-  }
-
-  .restaurant-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .search-filter {
-    flex-direction: row;
-    justify-content: center;
-  }
-
-  #search-input,
-  #city-filter {
-    margin: 0 8px;
-  }
+.restaurant-detail img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
 }
 
-@media(min-width: 1200px) {
-  .container {
-    max-width: 1200px;
-  }
+.restaurant-info-detail {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
 
-  .hero {
-    padding: 180px 0 100px;
-  }
+.restaurant-info-detail h2 {
+  font-size: 32px;
+  color: #222831;
+}
 
-  .hero-text h2 {
-    font-size: 48px;
-  }
+.restaurant-info-detail p {
+  font-size: 16px;
+  color: #424850;
+}
 
-  .hero-text p {
-    font-size: 24px;
-  }
+.restaurant-menu {
+  margin-top: 40px;
+}
 
-  .restaurant-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
+.restaurant-menu h3 {
+  font-size: 24px;
+  margin-bottom: 16px;
+  color: #222831;
+}
+
+.menu-list {
+  list-style-type: disc;
+  padding-left: 20px;
+}
+
+.menu-list li {
+  font-size: 16px;
+  color: #424850;
+  margin-bottom: 8px;
+}
+
+/* Blog-style Comments Section */
+.comments-section {
+  margin-top: 40px;
+}
+
+.comments-section h3 {
+  font-size: 24px;
+  margin-bottom: 16px;
+  color: #222831;
+}
+
+.comment {
+  border-bottom: 1px solid #ddd;
+  padding: 16px 0;
+}
+
+.comment:last-child {
+  border-bottom: none;
+}
+
+.comment-author {
+  font-weight: bold;
+  color: #76ABAE;
+}
+
+.comment-content {
+  margin-top: 8px;
+  font-size: 16px;
+  color: #424850;
 }
