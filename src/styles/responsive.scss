@@ -1,3 +1,4 @@
+
 /* src/styles/responsive.scss */
 
 /* Mobile First Approach */
@@ -19,6 +20,20 @@
     font-size: 20px;
   }
   
+  .restaurant-detail-image {
+    max-height: 250px;
+  }
+  
+  /* Adjust detail-top for mobile */
+  .detail-top {
+    flex-direction: column;
+  }
+  
+  /* Menu cards on mobile */
+  .menu-card {
+    flex: 1 1 100%;
+  }
+  
   /* Tablet Styles */
   @media (min-width: 600px) {
     .hamburger {
@@ -30,11 +45,11 @@
     }
   
     .hero-text h2 {
-      font-size: 28px;
+      font-size: 32px;
     }
   
     .hero-text p {
-      font-size: 18px;
+      font-size: 20px;
     }
   
     .restaurant-grid {
@@ -49,6 +64,16 @@
     #search-input,
     #city-filter {
       margin: 0 8px;
+    }
+  
+    /* Adjust detail-top for tablet */
+    .detail-top {
+      flex-direction: row;
+    }
+  
+    /* Menu cards on tablet */
+    .menu-card {
+      flex: 1 1 calc(50% - 16px);
     }
   }
   
@@ -85,6 +110,25 @@
     #city-filter {
       margin: 0 8px;
     }
+  
+    /* Adjust detail-top for desktop */
+    .detail-top {
+      flex-direction: row;
+    }
+  
+    .detail-top-content {
+      flex: 1;
+      padding-left: 24px;
+    }
+  
+    .restaurant-detail-image {
+      flex: 1;
+    }
+  
+    /* Menu cards on desktop */
+    .menu-card {
+      flex: 1 1 calc(33.333% - 16px);
+    }
   }
   
   /* Large Desktop Styles */
@@ -116,5 +160,24 @@
     .drawer-header .logo h1 {
       font-size: 24px;
     }
-  }
   
+    /* Adjust detail-top for large desktop */
+    .detail-top {
+      flex-direction: row;
+    }
+  
+    .detail-top-content {
+      flex: 1;
+      padding-left: 40px;
+    }
+  
+    .restaurant-detail-image {
+      flex: 1;
+      max-height: 500px;
+    }
+  
+    /* Menu cards on large desktop */
+    .menu-card {
+      flex: 1 1 calc(25% - 16px);
+    }
+  }

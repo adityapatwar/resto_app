@@ -1,5 +1,3 @@
-// src/scripts/views/app.js
-
 import UrlParser from '../routes/url-parser.js';
 import routes from '../routes/routes.js';
 
@@ -8,7 +6,6 @@ class App {
     this._button = button;
     this._drawer = drawer;
     this._content = content;
-
     this._initialAppShell();
     this._handleNavigation();
   }
@@ -28,14 +25,13 @@ class App {
   _handleNavigation() {
     // Handle navigation events
     window.addEventListener('popstate', () => this.renderPage());
-
     // Delegate link clicks
     document.body.addEventListener('click', (event) => {
       const target = event.target.closest('a');
       if (target && target.href.startsWith(window.location.origin)) {
         const href = target.getAttribute('href');
         // Check if it's an internal link
-        if (href.startsWith('/')) {
+        if (href.startsWith('/#') || href.startsWith('#/')) {
           event.preventDefault();
           history.pushState(null, '', href);
           this.renderPage();
@@ -45,19 +41,23 @@ class App {
   }
 
   async renderPage() {
-    const url = UrlParser.parseActiveUrlWithoutCombiner();
-    let page;
-    if (url.resource === 'detail' && url.id) {
-      page = routes['/detail'];
-    } else {
-      page = routes[`/${url.resource}`] || routes['/'];
-    }
-
-    if (page) {
-      this._content.innerHTML = await page.render(url.id);
-      await page.afterRender();
-    } else {
-      this._content.innerHTML = '<h2>Page not found</h2>';
+    try {
+      const url = UrlParser.parseActiveUrlWithoutCombiner();
+      let page;
+      if (url.resource === 'detail' && url.id) {
+        page = routes['/detail'];
+      } else {
+        page = routes[`/${url.resource}`] || routes['/'];
+      }
+      if (page) {
+        this._content.innerHTML = await page.render(url.id);
+        await page.afterRender();
+      } else {
+        this._content.innerHTML = '<h2>Page not found</h2>';
+      }
+    } catch (error) {
+      console.error('Error rendering page:', error);
+      this._content.innerHTML = '<h2>Error rendering page</h2>';
     }
   }
 }

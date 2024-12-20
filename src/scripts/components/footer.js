@@ -1,4 +1,4 @@
-const createFooter = () => `
+export const createFooter = () => `
   <footer>
     <div class="footer-container container">
       <p>&copy; 2024 RestoApp. All rights reserved.</p>
@@ -6,5 +6,3 @@ const createFooter = () => `
     </div>
   </footer>
 `;
-
-export default createFooter;

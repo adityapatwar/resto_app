@@ -1,5 +1,3 @@
-// src/scripts/views/pages/home-page.js
-
 import RestaurantSource from '../../data/restaurant-source.js';
 import anime from 'animejs/lib/anime.es.js';
 import {
@@ -13,7 +11,7 @@ const HomePage = {
         <div class="hero-text">
           <h2>Welcome to RestoApp</h2>
           <p>Discover the best restaurants near you</p>
-          <a href="/#featured-restaurants" class="btn">Explore Now</a>
+          <a href="#featured-restaurants" class="btn btn-hero">Explore Now</a>
         </div>
       </section>
       <div id="main-content" class="content">
@@ -24,7 +22,6 @@ const HomePage = {
               <input type="text" id="search-input" placeholder="Search restaurants..." aria-label="Search restaurants">
               <select id="city-filter" aria-label="Filter by city">
                 <option value="">All Cities</option>
-                <!-- Options will be populated by JavaScript -->
               </select>
             </div>
             <div id="restaurants" class="restaurant-grid"></div>
@@ -40,9 +37,8 @@ const HomePage = {
       const restaurantGridContainer = document.querySelector('.restaurant-grid');
       const searchInput = document.querySelector('#search-input');
       const cityFilter = document.querySelector('#city-filter');
-
-      // Function to render city options in the filter
       const renderCityOptions = (restaurants) => {
+        cityFilter.innerHTML = '<option value="">All Cities</option>';
         const cities = [...new Set(restaurants.map((restaurant) => restaurant.city))];
         cities.sort();
         cities.forEach((city) => {
@@ -52,8 +48,6 @@ const HomePage = {
           cityFilter.appendChild(option);
         });
       };
-
-      // Function to render restaurants
       const renderRestaurants = (restaurants) => {
         restaurantGridContainer.innerHTML = '';
         if (restaurants.length === 0) {
@@ -63,8 +57,6 @@ const HomePage = {
         restaurants.forEach((restaurant) => {
           restaurantGridContainer.innerHTML += createRestaurantItemComponent(restaurant);
         });
-
-        // Animations for restaurant items
         anime({
           targets: '.restaurant-item',
           opacity: [0, 1],
@@ -74,28 +66,31 @@ const HomePage = {
           easing: 'easeOutExpo',
         });
       };
-
-      // Function to filter restaurants based on search and city
-      const filterRestaurants = () => {
+      const debounce = (func, wait) => {
+        let timeout;
+        return (...args) => {
+          clearTimeout(timeout);
+          timeout = setTimeout(() => func.apply(this, args), wait);
+        };
+      };
+      const filterRestaurants = debounce(async () => {
         const searchText = searchInput.value.toLowerCase();
         const selectedCity = cityFilter.value;
-        const filteredRestaurants = restaurantsData.filter((restaurant) => {
-          const matchesSearch = restaurant.name.toLowerCase().includes(searchText);
-          const matchesCity = selectedCity === '' || restaurant.city === selectedCity;
-          return matchesSearch && matchesCity;
-        });
+        let filteredRestaurants = restaurantsData;
+        if (searchText) {
+          filteredRestaurants = filteredRestaurants.filter((restaurant) =>
+            restaurant.name.toLowerCase().includes(searchText)
+          );
+        }
+        if (selectedCity) {
+          filteredRestaurants = filteredRestaurants.filter((restaurant) => restaurant.city === selectedCity);
+        }
         renderRestaurants(filteredRestaurants);
-      };
-
-      // Initial rendering
+      }, 300);
       renderCityOptions(restaurantsData);
       renderRestaurants(restaurantsData);
-
-      // Event listeners for search and filter
       searchInput.addEventListener('input', filterRestaurants);
       cityFilter.addEventListener('change', filterRestaurants);
-
-      // Hero section animations
       anime({
         targets: '.hero-text h2',
         opacity: [0, 1],

@@ -6,14 +6,12 @@ const DrawerInitiator = {
       event.stopPropagation();
       this._toggleDrawer(drawer, button);
     });
-
     // Close drawer when clicking on content
-    content.addEventListener('click', (event) => {
+    content.addEventListener('click', () => {
       if (drawer.classList.contains('open')) {
         this._closeDrawer(drawer, button);
       }
     });
-
     // Close drawer when clicking outside
     document.addEventListener('click', (event) => {
       if (
@@ -24,14 +22,12 @@ const DrawerInitiator = {
         this._closeDrawer(drawer, button);
       }
     });
-
     window.addEventListener('keydown', (event) => {
       if (event.key === 'Escape' && drawer.classList.contains('open')) {
         this._closeDrawer(drawer, button);
       }
     });
   },
-
   _toggleDrawer(drawer, button) {
     const isDrawerOpen = drawer.classList.contains('open');
     button.setAttribute('aria-expanded', !isDrawerOpen);
@@ -41,7 +37,6 @@ const DrawerInitiator = {
       this._openDrawer(drawer, button);
     }
   },
-
   _openDrawer(drawer) {
     drawer.classList.add('open');
     anime({
@@ -51,7 +46,6 @@ const DrawerInitiator = {
       easing: 'easeOutExpo',
     });
   },
-
   _closeDrawer(drawer, button) {
     anime({
       targets: drawer,
