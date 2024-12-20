@@ -50,6 +50,7 @@
   "dependencies": {
     "animejs": "^3.2.2",
     "idb": "^8.0.1",
-    "regenerator-runtime": "^0.14.1"
+    "regenerator-runtime": "^0.14.1",
+    "ws": "^8.18.0"
   }
 }
