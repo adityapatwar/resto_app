@@ -2,6 +2,12 @@
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import CopyWebpackPlugin from 'copy-webpack-plugin';
 import path from 'path';
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+
+// Define __filename and __dirname
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 export default {
   entry: {
@@ -15,14 +21,18 @@ export default {
   module: {
     rules: [
       {
-        test: /\.css$/,
+        test: /\.css$/, // Matches .css files
         use: [
-          {
-            loader: 'style-loader',
-          },
-          {
-            loader: 'css-loader',
-          },
+          'style-loader',
+          'css-loader',
+        ],
+      },
+      {
+        test: /\.scss$/, // Matches .scss files
+        use: [
+          'style-loader',
+          'css-loader',
+          'sass-loader',
         ],
       },
     ],
