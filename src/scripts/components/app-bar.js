@@ -50,6 +50,8 @@ const initAppBar = () => {
       menuButton.setAttribute('aria-expanded', 'true');
       // Prevent body from scrolling when drawer is open
       document.body.style.overflow = 'hidden';
+      // Set focus to the drawer for accessibility
+      drawer.focus();
     });
   }
 
@@ -60,6 +62,8 @@ const initAppBar = () => {
       menuButton.setAttribute('aria-expanded', 'false');
       // Restore body scroll
       document.body.style.overflow = '';
+      // Return focus to the menu button
+      menuButton.focus();
     });
   }
 

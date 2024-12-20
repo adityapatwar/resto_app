@@ -1,6 +1,5 @@
 // src/scripts/views/app.js
 
-import DrawerInitiator from '../utils/drawer-initiator.js';
 import UrlParser from '../routes/url-parser.js';
 import routes from '../routes/routes.js';
 
@@ -15,13 +14,6 @@ class App {
   }
 
   _initialAppShell() {
-    // Initialize the drawer
-    DrawerInitiator.init({
-      button: this._button,
-      drawer: this._drawer,
-      content: this._content,
-    });
-
     // Add scroll event listener for header
     window.addEventListener('scroll', () => {
       const header = document.querySelector('header');
@@ -43,10 +35,9 @@ class App {
       if (target && target.href.startsWith(window.location.origin)) {
         const href = target.getAttribute('href');
         // Check if it's an internal link
-        if (href.startsWith('/#')) {
+        if (href.startsWith('/')) {
           event.preventDefault();
-          const url = new URL(target.href);
-          history.pushState(null, '', url.pathname + url.hash);
+          history.pushState(null, '', href);
           this.renderPage();
         }
       }
@@ -63,7 +54,7 @@ class App {
     }
 
     if (page) {
-      this._content.innerHTML = await page.render();
+      this._content.innerHTML = await page.render(url.id);
       await page.afterRender();
     } else {
       this._content.innerHTML = '<h2>Page not found</h2>';
